@@ -57,6 +57,7 @@ public class LoseMoneyFeature implements Listener {
         .thenApply(balance -> balance * 0.001D * Math.random()).whenComplete((amount, err) -> {
           economyApi.addBalance(player.getUniqueId(), -amount).thenRunAsync(() -> {
             ItemStack itemStack = new ItemStack(Material.GOLD_NUGGET);
+            itemStack.setAmount(amount.intValue());
             World world = player.getWorld();
             world.dropItemNaturally(player.getLocation(), itemStack, item -> {
               item.setPickupDelay(20 * 3);
@@ -87,12 +88,14 @@ public class LoseMoneyFeature implements Listener {
       return;
     }
 
+    event.setCancelled(true);
+    player.playPickupItemAnimation(item);
+    item.remove();
 
     item.getMetadata("coin-item").stream().findFirst().ifPresent(metadataValue -> {
       player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 0.8F);
-      item.remove();
-      event.setCancelled(true);
-      economyApi.addBalance(player.getUniqueId(), metadataValue.asDouble());
+      double amount = metadataValue.asDouble();
+      economyApi.addBalance(player.getUniqueId(), amount);
     });
   }
 }
