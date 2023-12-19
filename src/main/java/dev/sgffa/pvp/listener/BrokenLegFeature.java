@@ -6,6 +6,7 @@ import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -47,8 +48,9 @@ public class BrokenLegFeature implements Listener {
 
     long end = System.currentTimeMillis() + duration * 50L;
     Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, (task) -> {
-      player.spawnParticle(Particle.REDSTONE, player.getLocation(), 3, options);
-      player.spawnParticle(Particle.BLOCK_CRACK, player.getLocation(), 6, Bukkit.createBlockData(
+      World world = player.getWorld();
+      world.spawnParticle(Particle.REDSTONE, player.getLocation(), 3, options);
+      world.spawnParticle(Particle.BLOCK_CRACK, player.getLocation(), 6, Bukkit.createBlockData(
           Material.REDSTONE_BLOCK));
       //player.sendHurtAnimation((float) (360 * Math.random() - 180F));
 
