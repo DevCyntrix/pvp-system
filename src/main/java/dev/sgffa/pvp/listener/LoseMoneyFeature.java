@@ -88,11 +88,10 @@ public class LoseMoneyFeature implements Listener {
       return;
     }
 
-    event.setCancelled(true);
-    player.playPickupItemAnimation(item);
-    item.remove();
-
     item.getMetadata("coin-item").stream().findFirst().ifPresent(metadataValue -> {
+      event.setCancelled(true);
+      player.playPickupItemAnimation(item);
+      item.remove();
       player.playSound(player.getLocation(), Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0F, 0.8F);
       double amount = metadataValue.asDouble();
       economyApi.addBalance(player.getUniqueId(), amount);
