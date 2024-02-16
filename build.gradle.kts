@@ -23,7 +23,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.20.2-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:1.20.4-R0.1-SNAPSHOT")
     compileOnly("dev.sgffa:api:1.0.1")
     compileOnly("org.jetbrains:annotations:24.1.0")
 
@@ -42,7 +42,7 @@ paper {
 
     serverDependencies {
         register("api") {
-            load = PaperPluginDescription.RelativeLoadOrder.BEFORE;
+            load = PaperPluginDescription.RelativeLoadOrder.BEFORE
         }
     }
 }
