@@ -5,6 +5,7 @@ import dev.sgffa.pvp.listener.BrokenLegFeature;
 import dev.sgffa.pvp.listener.GrabArrowFromPlayerFeature;
 import dev.sgffa.pvp.listener.HigherJumpFeature;
 import dev.sgffa.pvp.listener.LoseMoneyFeature;
+import dev.sgffa.pvp.listener.TNTUsageFeature;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class PvPPlugin extends JavaPlugin {
@@ -16,5 +17,6 @@ public class PvPPlugin extends JavaPlugin {
     getServer().getPluginManager().registerEvents(new LoseMoneyFeature(this, load), this);
     getServer().getPluginManager().registerEvents(new HigherJumpFeature(this), this);
     getServer().getPluginManager().registerEvents(new GrabArrowFromPlayerFeature(this), this);
+    getServer().getPluginManager().registerEvents(new TNTUsageFeature(), this);
   }
 }
